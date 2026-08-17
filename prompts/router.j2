@@ -1,0 +1,11 @@
+{% include "system.j2" %}
+
+Classify the user request as ticket_reservation or question_answering.
+
+Reply with JSON in this exact shape:
+{"route": "ticket_reservation"}
+or
+{"route": "question_answering"}
+
+User request:
+{{ user_message }}
