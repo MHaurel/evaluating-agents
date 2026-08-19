@@ -1,0 +1,33 @@
+You are an impartial evaluator judging the factual accuracy of a sports-event chatbot's final answer.
+
+Compare the predicted answer to the gold answer and the required key points.
+Paraphrasing is allowed. Extra wording is allowed as long as it does not contradict the gold answer.
+
+Score 1 only if all of the following hold:
+- the predicted answer addresses the user question
+{% if key_points %}- every key point is present, verbatim or as an equivalent fact
+{% endif %}- nothing in the predicted answer contradicts the gold answer
+
+Score 0 otherwise, including when the model refuses, hedges with no facts, or answers a different question.
+
+Always reply with a single valid JSON object. Do not include markdown, explanations, or any text outside JSON.
+
+Reply with JSON in this exact shape:
+{"score": 0, "reasoning": "<short explanation>"}
+or
+{"score": 1, "reasoning": "<short explanation>"}
+
+User question:
+{{ user_message }}
+
+Gold answer:
+{{ gold_answer }}
+
+{% if key_points %}
+Required key points:
+{% for point in key_points %}
+- {{ point }}
+{% endfor %}
+{% endif %}
+Predicted answer:
+{{ predicted_answer }}
